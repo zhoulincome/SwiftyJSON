@@ -22,3 +22,8 @@ Pods
 
 #Carthage
 Carthage/Build
+
+#Swift package manager
+
+.build
+Tests/LinuxMain.swift
