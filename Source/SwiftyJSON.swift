@@ -810,15 +810,7 @@ extension JSON: Swift.RawRepresentable {
     public var rawValue: Any {
         return self.object
     }
-#if os(Linux)
-    public func rawData(options opt: JSONSerialization.WritingOptions = JSONSerialization.WritingOptions(rawValue: 0)) throws -> Data {
-        guard LclJSONSerialization.isValidJSONObject(self.object) else {
-            throw SwiftyJSONError.errorInvalidJSON("JSON is invalid")
-        }
 
-        return try LclJSONSerialization.dataWithJSONObject(self.object, options: opt)
-    }
-#else
     public func rawData(options opt: JSONSerialization.WritingOptions = JSONSerialization.WritingOptions(rawValue: 0)) throws -> Data {
         guard JSONSerialization.isValidJSONObject(self.object) else {
             throw SwiftyJSONError.errorInvalidJSON("JSON is invalid")
@@ -826,7 +818,6 @@ extension JSON: Swift.RawRepresentable {
 
         return try JSONSerialization.data(withJSONObject: self.object, options: opt)
     }
-#endif
 
 #if os(Linux)
     public func rawString(encoding: String.Encoding = String.Encoding.utf8, options opt: JSONSerialization.WritingOptions = .prettyPrinted) -> String? {
